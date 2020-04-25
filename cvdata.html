@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="theme.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CV Generator</title>
+</head>
+<body>
+  <h1>Krok 1: Dane podstawowe</h1>
+    <p>Wprowadzone poniżej dane zostaną wyświetlone jako pierwsze w Twoim CV</p>
+  <form action="" class="main-form needs-validation" novalidate>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="title">Tytuł naukowy </label>
+                <select name="gender" id="gender" class="form-control">
+                    <option value="none">brak</option>
+                    <option value="bachelor">lic.</option>
+                    <option value="master">mgr</option>
+                    <option value="phd">dr</option>
+                    <option value="prof">prof.</option>
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="firstname">Imię </label>
+                <input type="text" name="firstname" id="firstname" class="form-control">
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="lastname">Nazwisko</label>
+                <input type="text" name="lastname" id="lastname" class="form-control">
+
+            </div>
+        </div>
+    </div>
+    <h1>Krok 2: Lokalizacja i dane kontaktowe: </h1>
+    <div class="form-group">
+        <label for="city">Miejsce zamieszkania</label>
+        <input type="text" name="city" id="city" class="form-control" required>
+        <div class="invalid-feedback">Wprowadź swoje miasto zamieszkania.</div>
+    </div>
+    <div class="form-group">
+        <label for="mobility">Czy mozliwa jest dla Ciebie zmiana miejsca zamieszkania?</label><br>
+        <input type="radio" id="no" name="mobility" value="no">
+        <label for="no">Nie</label><br>
+        <input type="radio" id="yes" name="mobility" value="yes">
+        <label for="yes">Tak</label><br>
+    </div>
+    <div class="form-group">
+        <label for="email">Adres e-mail:</label>
+        <input type="email" name="email" id="email" class="form-control" required> 
+    </div>
+    <div class="form-group">
+        <label for="phone">Numer telefonu:</label>
+        <input type="tel" name="phone" id="phone" class="form-control" required> 
+    </div>
+
+    <div class="form-check">
+        <input type="checkbox" id="accept-terms" class="form-check-input">
+        <label for="accept-terms" class="form-check-label">Accept Terms &amp; Conditions</label>
+    </div>
+<div class="form-uni" id="uniForm">
+  <form action="/action_page.php">
+    <h1>Krok 3: Dodaj pozycje wykształcenia:</h1>
+  <div class="form-group">
+    <label for="school"><b>Nazwa szkoły/uniwersytetu</b></label>
+    <input type="text" placeholder="Wpisz nazwę" name="school" class="form-control"required>
+      </div>
+  <div class="form-group">
+    <label for="schooldesc"><b>Specjalność/przedmioty rozszerzone/dodatkowe informacje</b></label>
+    <input type="text" placeholder="Uzupełnij dodatkowe informacje" class="form-control"name="schooldesc" required>
+      </div>
+    <button type="submit" class="btn">Zatwierdź pozycję</button>
+    <button type="submit" class="btn cancel" onclick="closeForm()">Anuluj</button>
+  </form>
+    </div>
+<div class="form-job" id="jobForm">
+  <form action="/action_page.php">
+    <h1>Krok 4: Dodaj pozycje doświadczenia zawodowego:</h1>
+  <div class="form-group">
+    <label for="org"><b>Nazwa organizacji</b></label>
+    <input type="text" placeholder="Wpisz nazwę" name="org" class="form-control"required>
+      </div>
+<label for="position"><b>Stanowisko</b></label>
+    <input type="text" placeholder="Wpisz nazwę stanowiska" name="org" class="form-control"required>
+  <div class="form-group">
+    <label for="jobdesc"><b></b></label>
+    <input type="text" placeholder="Opis stanowiska" class="form-control" name="jobdesc" required>
+      </div>
+    <button type="submit" class="btn">Zatwierdź pozycję</button>
+    <button type="submit" class="btn cancel" onclick="closeForm()">Anuluj</button>
+  </form>
+    </div>
+<div class="form-skills" id="skillsForm">
+<h1>Krok 5: Umiejętności i języki obce</h1>
+  <form action="/action_page.php">
+  <div class="form-group">
+    <label for="org"><b>Umiejętności</b></label>
+    <input type="text" placeholder="Dodaj umiejętność" name="org" class="form-control"required>
+      </div>
+    <button type="submit" class="btn">Zatwierdź pozycję</button>
+    <button type="submit" class="btn cancel" onclick="closeForm()">Anuluj</button></form>
+</div>
+<div class="form-languages" id="langForm">
+  <form action="/action_page.php">
+  <div class="form-group">
+    <label for="lang"><b>Języki obce</b></label>
+    <input type="text" placeholder="Dodaj umiejętność" name="org" class="form-control"required>
+      </div>
+<fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-2 pt-0">Poziom znajomości</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="levels" id="level1" value="level1" checked>
+          <label class="form-check-label" for="gridRadios1">
+            Początkujący (A1/A2)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="levels" id="level2" value="level2">
+          <label class="form-check-label" for="gridRadios2">
+            Średniozaawansowany (B1/B2)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="levels" id="level3" value="level3">
+          <label class="form-check-label" for="gridRadios3">
+            Zaawansowany (B2+/C1)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="levels" id="level4" value="level4">
+          <label class="form-check-label" for="gridRadios4">
+            Biegły (B2+/C1)
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </fieldset>
+    <button type="submit" class="btn">Zatwierdź pozycję</button>
+    <button type="submit" class="btn cancel" onclick="closeForm()">Anuluj</button></form>
+</div>
+
+
+</body>
+</html>
