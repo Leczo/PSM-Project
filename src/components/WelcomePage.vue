@@ -84,6 +84,9 @@
         Zarejestrowany?
         <b-button type="button" variant="primary" @click="changeForm()"
           >Zaloguj się</b-button
+        >
+        <b-button type="button" variant="primary" @click="googleSignUp()"
+          >Google</b-button
         >.
       </p>
     </b-form>
@@ -106,9 +109,25 @@ export default {
   },
   methods: {
     signUp: function() {
+      if (this.form.passwordRepeated != this.form.password) {
+        alert("Hasła się różnią");
+      }
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
+        .createUserWithEmailAndPassword(this.form.email, this.form.password)
+        .then(
+          function() {
+            alert("Zostałeś Zarejestrowany");
+          },
+          function(err) {
+            alert("Błąd" + err.message);
+          }
+        );
+    },
+    signIn: function() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(
           function() {
             alert("Zostałeś zalogowany");
@@ -117,6 +136,30 @@ export default {
             alert("Błąd" + err.message);
           }
         );
+    },
+    googleSignUp: function() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(function(result) {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          //var token = result.credential.accessToken;
+          // The signed-in user info.
+          //var user = result.user;
+          alert(result.message);
+        })
+        .catch(function(error) {
+          alert(error.message);
+          // Handle Errors here.
+          //var errorCode = error.code;
+          //var errorMessage = error.message;
+          // The email of the user's account used.
+          //var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          //var credential = error.credential;
+          /// ...
+        });
     },
     changeForm: function() {
       this.showLoginForm = !this.showLoginForm;
