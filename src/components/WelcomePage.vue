@@ -10,11 +10,7 @@
 
     <!-- Login Form -->
     <b-form v-if="showLoginForm">
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-      >
+      <b-form-group id="input-group-1" label="Email address:" label-for="input-1">
         <b-form-input
           id="input-1"
           v-model="form.email"
@@ -32,21 +28,15 @@
           placeholder="Enter password"
         ></b-form-input>
       </b-form-group>
-      <b-button type="button" variant="primary">Zaloguj się</b-button>
+      <b-button @click="signIn()" type="button" variant="primary">Zaloguj się</b-button>
       <p>
         Nie masz jeszcze konta?
-        <b-button type="button" variant="primary" @click="changeForm()"
-          >Zarejestruj się</b-button
-        >.
+        <b-button type="button" variant="primary" @click="changeForm()">Zarejestruj się</b-button>.
       </p>
     </b-form>
     <!-- Register form -->
     <b-form v-else>
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-      >
+      <b-form-group id="input-group-1" label="Email address:" label-for="input-1">
         <b-form-input
           id="input-1"
           v-model="form.email"
@@ -64,11 +54,7 @@
           placeholder="Enter password"
         ></b-form-input>
       </b-form-group>
-      <b-form-group
-        id="input-group-3"
-        label="Repeat password:"
-        label-for="input-3"
-      >
+      <b-form-group id="input-group-3" label="Repeat password:" label-for="input-3">
         <b-form-input
           id="input-3"
           v-model="form.passwordRepeated"
@@ -77,17 +63,11 @@
           placeholder="Enter a password again"
         ></b-form-input>
       </b-form-group>
-      <b-button @click="signUp" type="button" variant="primary"
-        >Zarejestruj się</b-button
-      >
+      <b-button @click="signUp" type="button" variant="primary">Zarejestruj się</b-button>
       <p>
         Zarejestrowany?
-        <b-button type="button" variant="primary" @click="changeForm()"
-          >Zaloguj się</b-button
-        >
-        <b-button type="button" variant="primary" @click="googleSignUp()"
-          >Google</b-button
-        >.
+        <b-button type="button" variant="primary" @click="changeForm()">Zaloguj się</b-button>
+        <b-button type="button" variant="primary" @click="googleSignUp()">Google</b-button>.
       </p>
     </b-form>
   </b-container>
@@ -95,6 +75,8 @@
 
 <script>
 import firebase from "firebase";
+import router from "../router.js";
+
 export default {
   name: "WelcomePage",
   data() {
@@ -103,8 +85,8 @@ export default {
       form: {
         email: "",
         password: "",
-        passwordRepeated: "",
-      },
+        passwordRepeated: ""
+      }
     };
   },
   methods: {
@@ -130,7 +112,7 @@ export default {
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(
           function() {
-            alert("Zostałeś zalogowany");
+            router.replace("home");
           },
           function(err) {
             alert("Błąd" + err.message);
@@ -143,7 +125,7 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(function(result) {
-          // This gives you a Google Access Token. You can use it to access the Google API.
+          // This gives y ou a Google Access Token. You can use it to access the Google API.
           //var token = result.credential.accessToken;
           // The signed-in user info.
           //var user = result.user;
@@ -163,8 +145,8 @@ export default {
     },
     changeForm: function() {
       this.showLoginForm = !this.showLoginForm;
-    },
-  },
+    }
+  }
 };
 </script>
 

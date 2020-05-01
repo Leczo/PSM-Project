@@ -1,17 +1,14 @@
 import Vue from 'vue'
 import App from './App.vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import VueRouter from 'vue-router'
-import Routes from './routes.js'
 import firebase from 'firebase'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
+import router from './router'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-Vue.use(VueRouter)
 
 const firebaseConfig = {
   apiKey: "AIzaSyAyCIX3bbIwypUkdThkqccWrqeduwJKyXA",
@@ -26,12 +23,15 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+let app = ''
 
-const router = new VueRouter({
-  mode: 'history',
-  routes: Routes
+firebase.auth().onAuthStateChanged(() => {
+  if (!app) {
+    app = new Vue({
+      render: h => h(App),
+      router: router
+    }).$mount('#app')
+  }
 })
-new Vue({
-  render: h => h(App),
-  router: router
-}).$mount('#app')
+
+
