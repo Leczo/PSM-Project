@@ -1,0 +1,100 @@
+<template>
+  <b-container class="container">
+    <h2>Stworz CV w czterech prostych krokach!</h2>
+    <p>Utwórz konto i się zaloguj.</p>
+    <p>Wprowadź dane do swojego CV</p>
+    <p>Wybierz jeden z dostępnych szablonów</p>
+    <p>Pobierz swoje nowe CV</p>
+    <br />
+    <br />
+
+    <!-- Login Form -->
+    <b-form v-if="showLoginForm">
+      <b-form-group id="input-group-1" label="Email address:" label-for="input-1">
+        <b-form-input
+          id="input-1"
+          v-model="form.email"
+          type="email"
+          required
+          placeholder="Enter email"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="form.password"
+          type="password"
+          required
+          placeholder="Enter password"
+        ></b-form-input>
+      </b-form-group>
+      <b-button type="button" variant="primary">Zaloguj się</b-button>
+      <p>
+        Nie masz jeszcze konta?
+        <b-button type="button" variant="primary" @click="changeForm()">Zarejestruj się</b-button>.
+      </p>
+    </b-form>
+    <!-- Register form -->
+    <b-form v-else>
+      <b-form-group id="input-group-1" label="Email address:" label-for="input-1">
+        <b-form-input
+          id="input-1"
+          v-model="form.email"
+          type="email"
+          required
+          placeholder="Enter email"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="form.password"
+          type="password"
+          required
+          placeholder="Enter password"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-3" label="Repeat password:" label-for="input-3">
+        <b-form-input
+          id="input-3"
+          v-model="form.passwordRepeated"
+          type="password"
+          required
+          placeholder="Enter a password again"
+        ></b-form-input>
+      </b-form-group>
+      <b-button type="button" variant="primary">Zarejestruj się</b-button>
+      <p>
+        Zarejestrowany?
+        <b-button type="button" variant="primary" @click="changeForm()">Zaloguj się</b-button>.
+      </p>
+    </b-form>
+  </b-container>
+</template>
+
+<script>
+export default {
+  name: "WelcomePage",
+  data() {
+    return {
+      showLoginForm: true,
+      form: {
+        email: "",
+        password: "",
+        passwordRepeated: ''
+      }
+    };
+  },
+  methods: {
+    changeForm: function() {
+      this.showLoginForm = !this.showLoginForm;
+    }
+  }
+};
+</script>
+
+<style scoped>
+.container {
+  text-align: center;
+}
+</style>
