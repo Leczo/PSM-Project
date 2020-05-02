@@ -7,7 +7,6 @@
       />
       <b-navbar
         toggleable
-        style="  border-top-left-radius: 20px; border-top-right-radius: 20px;"
         fixed="bottom"
         sticky="true"
         type="dark"
@@ -29,9 +28,9 @@
           <b-tab title="Główna" active>
             <template v-slot:title>
               <b-icon icon="house-fill" title="d" aria-hidden="true"></b-icon>
-              <span> Główna</span>
+              <span></span>
             </template>
-            <b-card-text>Tab contents 1</b-card-text>
+            <b-card-text><CvData /></b-card-text>
           </b-tab>
           <b-tab title="Uzupełnij Dane">
             <template v-slot:title>
@@ -53,7 +52,12 @@
                       vertical
                       nav-wrapper-class="w-50"
                     >
-                      <b-tab title="Edukacja" active>
+                      <b-tab title="Dane Osobowe" active>
+                        <b-card-text><strong>Dane Osobowe</strong></b-card-text>
+                        <PersonalData />
+                      </b-tab>
+
+                      <b-tab title="Edukacja">
                         <b-card-text><strong>Edukacja</strong></b-card-text>
                         <EducationForm />
                       </b-tab>
@@ -62,7 +66,7 @@
                         <JobForm />
                       </b-tab>
                       <b-tab title="Języki">
-                        <b-card-text><strong>Praca</strong></b-card-text>
+                        <b-card-text><strong>Języki</strong></b-card-text>
                         <LanguageForm />
                       </b-tab>
                     </b-tabs>
@@ -104,6 +108,8 @@ import FileUpload from "./FileUpload.vue";
 import EducationForm from "./EducationForm.vue";
 import JobForm from "./JobForm.vue";
 import LanguageForm from "./LanguageForm.vue";
+import PersonalData from "./PersonalData.vue";
+import CvData from "./CvData.vue";
 
 export default {
   name: "Home",
@@ -112,6 +118,8 @@ export default {
     EducationForm,
     JobForm,
     LanguageForm,
+    PersonalData,
+    CvData,
   },
   methods: {
     logout() {
