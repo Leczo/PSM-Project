@@ -3,9 +3,9 @@
     <b-form v-if="showLoginForm">
       <b-row>
         <b-col>
-          <b-button @click="changeForm()" pill variant="primary"
-            >Formularz logowania</b-button
-          >
+          <b-button @click="changeForm()" pill variant="primary">{{
+            logForm
+          }}</b-button>
         </b-col>
       </b-row>
       <br />
@@ -66,10 +66,15 @@
 
       <b-row>
         <b-col>
-          <b-button variant="primary">Zarejestruj się</b-button>
+          <b-button @click="signUp" variant="primary">Zarejestruj się</b-button>
         </b-col>
+      </b-row>
+      <br />
+      <b-row>
         <b-col>
-          <b-button variant="primary">Zaloguj sie</b-button>
+          <b-button @click="googleSignUp" variant="primary"
+            >Rejestracja Google</b-button
+          >
         </b-col>
       </b-row>
     </b-form>
@@ -77,9 +82,9 @@
     <b-form v-else>
       <b-row>
         <b-col>
-          <b-button @click="changeForm()" pill variant="primary"
-            >Formularz logowania</b-button
-          >
+          <b-button @click="changeForm()" pill variant="primary">{{
+            regForm
+          }}</b-button>
         </b-col>
       </b-row>
       <br />
@@ -119,28 +124,12 @@
         </b-col>
       </b-row>
       <br />
-      <b-row>
-        <b-col>
-          <b-input-group size="lg">
-            <template v-slot:prepend>
-              <b-input-group-text>
-                <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill
-              ></b-input-group-text>
-            </template>
-            <b-form-input
-              size="lg"
-              v-model="form.name"
-              required
-              placeholder="Powrórz hasło"
-            ></b-form-input>
-          </b-input-group>
-        </b-col>
-      </b-row>
+
       <br />
 
       <b-row>
         <b-col>
-          <b-button type="submit" variant="primary">Zaloguj sie</b-button>
+          <b-button @click="signIn" variant="primary">Zaloguj sie</b-button>
         </b-col>
       </b-row>
     </b-form>
@@ -149,11 +138,16 @@
 
 <script>
 import firebase from "firebase";
+import router from "../router.js";
+
 export default {
   name: "WelcomePage",
   data() {
     return {
-      showLoginForm: true,
+      showLoginForm: false,
+      wrongCredencials: false,
+      regForm: "Formularz logowania",
+      logForm: "Formularz rejestracji",
       form: {
         email: "",
         password: "",
@@ -174,7 +168,7 @@ export default {
             alert("Zostałeś Zarejestrowany");
           },
           function(err) {
-            alert("Błąd" + err.message);
+            alert("Błąd " + err.message);
           }
         );
     },
@@ -184,7 +178,7 @@ export default {
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(
           function() {
-            alert("Zostałeś zalogowany");
+            router.replace("home");
           },
           function(err) {
             alert("Błąd" + err.message);
@@ -197,7 +191,7 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(function(result) {
-          // This gives you a Google Access Token. You can use it to access the Google API.
+          // This gives y ou a Google Access Token. You can use it to access the Google API.
           //var token = result.credential.accessToken;
           // The signed-in user info.
           //var user = result.user;
