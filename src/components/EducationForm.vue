@@ -3,61 +3,17 @@
     <div>
       <div class="form-group">
         <label>Nazwa placówki</label>
-        <input class="form-control" placeholder="UEK" />
+        <input class="form-control" placeholder="np. UEK" />
       </div>
       <div class="form-group">
         <label>Profil</label>
-        <input type="text" placeholder="Informatyczny" class="form-control" />
-      </div>
-
-      <div class="form-group">
-        <label>Napisz coś od siebie</label>
-        <textarea
+        <input
+          type="text"
+          placeholder="np.Informatyczny"
           class="form-control"
-          placeholder="Będzie mi brakować tej szkoły."
-          rows="3"
-        ></textarea>
+        />
       </div>
 
-      <div class="form-group">
-        <label>Checkboxes</label>
-        <div class="checkbox">
-          <label> <input type="checkbox" value="" />Checkbox 1 </label>
-        </div>
-        <div class="checkbox">
-          <label> <input type="checkbox" value="" />Checkbox 2 </label>
-        </div>
-        <div class="checkbox">
-          <label> <input type="checkbox" value="" />Checkbox 3 </label>
-        </div>
-        <div class="checkbox">
-          <label> <input type="checkbox" value="" />Checkbox 4 </label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Widoczność</label>
-        <div class="radio">
-          <label>
-            <input
-              type="radio"
-              name="public"
-              id="optionsRadios1"
-              value="option1"
-              checked
-            />Publiczny
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input
-              type="radio"
-              name="private"
-              id="optionsRadios2"
-              value="option2"
-            />Prywatny
-          </label>
-        </div>
-      </div>
       <div class="form-group">
         <label>Uczęszałem od</label>
         <select class="form-control">
@@ -112,7 +68,18 @@
 </template>
 
 <script>
-export default {};
+//import db from "firebase";
+export default {
+  name: "EductionForm",
+  data() {
+    return null;
+  },
+  methods: {
+    saveEdForm: function() {
+      return null;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
