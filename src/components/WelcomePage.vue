@@ -1,105 +1,170 @@
 <template>
-  <b-container class="container">
-    <h2>Stworz CV w czterech prostych krokach!</h2>
-    <p>Utwórz konto i się zaloguj.</p>
-    <p>Wprowadź dane do swojego CV</p>
-    <p>Wybierz jeden z dostępnych szablonów</p>
-    <p>Pobierz swoje nowe CV</p>
-    <br />
-    <br />
-
-    <!-- Login Form -->
-    <b-form v-if="showLoginForm">
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          required
-          placeholder="Enter email"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.password"
-          type="password"
-          required
-          placeholder="Enter password"
-        ></b-form-input>
-      </b-form-group>
-      <b-button type="button" variant="primary">Zaloguj się</b-button>
-      <p>
-        Nie masz jeszcze konta?
-        <b-button type="button" variant="primary" @click="changeForm()"
-          >Zarejestruj się</b-button
-        >.
-      </p>
-    </b-form>
+  <b-jumbotron class="main" container-fluid>
     <!-- Register form -->
-    <b-form v-else>
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          required
-          placeholder="Enter email"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.password"
-          type="password"
-          required
-          placeholder="Enter password"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        id="input-group-3"
-        label="Repeat password:"
-        label-for="input-3"
-      >
-        <b-form-input
-          id="input-3"
-          v-model="form.passwordRepeated"
-          type="password"
-          required
-          placeholder="Enter a password again"
-        ></b-form-input>
-      </b-form-group>
-      <b-button @click="signUp" type="button" variant="primary"
-        >Zarejestruj się</b-button
-      >
-      <p>
-        Zarejestrowany?
-        <b-button type="button" variant="primary" @click="changeForm()"
-          >Zaloguj się</b-button
-        >
-        <b-button type="button" variant="primary" @click="googleSignUp()"
-          >Google</b-button
-        >.
-      </p>
+    <b-form class="form" v-if="showLoginForm">
+      <b-row>
+        <b-col>
+          <b-button @click="changeForm()" pill variant="primary">
+            {{ logForm }}
+          </b-button>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text>
+                <b-icon-envelope-open-fill></b-icon-envelope-open-fill>
+              </b-input-group-text>
+            </template>
+            <b-form-input
+              size="lg"
+              v-model="form.email"
+              required
+              placeholder="Wpisz Email"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text>
+                <b-icon-lock-fill></b-icon-lock-fill>
+              </b-input-group-text>
+            </template>
+            <b-form-input
+              size="lg"
+              v-model="form.password"
+              @keyup.enter.native="signUp"
+              required
+              type="password"
+              placeholder="Wpisz Hasło"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text>
+                <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill>
+              </b-input-group-text>
+            </template>
+            <b-form-input
+              @keyup.enter.native="signUp"
+              size="lg"
+              v-model="form.passwordRepeated"
+              required
+              type="password"
+              placeholder="Powtórz hasło"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+
+      <b-row>
+        <b-col>
+          <b-alert v-if="registrationFailed" show variant="danger">{{
+            registrationFailed
+          }}</b-alert>
+          <b-button @click="signUp" variant="primary">Zarejestruj się</b-button>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-button @click="googleSignUp" variant="primary"
+            >Rejestracja Google</b-button
+          >
+        </b-col>
+      </b-row>
     </b-form>
-  </b-container>
+    <!-- Login form -->
+    <b-form v-else>
+      <b-row>
+        <b-col>
+          <b-button @click="changeForm()" pill variant="primary">{{
+            regForm
+          }}</b-button>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text>
+                <b-icon-envelope-open-fill></b-icon-envelope-open-fill>
+              </b-input-group-text>
+            </template>
+            <b-form-input
+              size="lg"
+              @keyup.enter.native="signIn"
+              v-model="form.email"
+              required
+              placeholder="Wpisz Email"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text>
+                <b-icon-lock-fill></b-icon-lock-fill>
+              </b-input-group-text>
+            </template>
+            <b-form-input
+              @keyup.enter.native="signIn"
+              size="lg"
+              v-model="form.password"
+              required
+              type="password"
+              placeholder="Wpisz Hasło"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+
+      <b-row>
+        <b-col>
+          <b-alert v-if="loginFailed" show variant="danger">{{
+            loginFailed
+          }}</b-alert>
+          <b-alert v-else-if="registrationSuccess" show variant="success">{{
+            registrationSuccess
+          }}</b-alert>
+          <b-button @click="signIn" variant="primary">Zaloguj się</b-button>
+        </b-col>
+      </b-row>
+    </b-form>
+  </b-jumbotron>
 </template>
 
 <script>
 import firebase from "firebase";
+import router from "../router.js";
+
 export default {
   name: "WelcomePage",
   data() {
     return {
-      showLoginForm: true,
+      loginFailed: "",
+      registrationFailed: "",
+      registrationSuccess: "",
+      showLoginForm: false,
+      regForm: "Nie masz jeszcze konta? Zarejestruj się!",
+      logForm: "Przejdź do formularza logowania",
       form: {
         email: "",
         password: "",
@@ -109,33 +174,32 @@ export default {
   },
   methods: {
     signUp: function() {
-      if (this.form.passwordRepeated != this.form.password) {
-        alert("Hasła się różnią");
+      if (this.form.password != this.form.passwordRepeated) {
+        this.registrationFailed = "Passwords must match.";
+        return;
       }
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then(
-          function() {
-            alert("Zostałeś Zarejestrowany");
-          },
-          function(err) {
-            alert("Błąd" + err.message);
-          }
-        );
+        .then(() => {
+          this.registrationFailed = "";
+          this.loginFailed = "";
+          this.registrationSuccess =
+            "You have successfully registered. Now you can sign in.";
+          this.changeForm();
+        })
+        .catch((err) => {
+          this.registrationFailed = err.message;
+        });
     },
     signIn: function() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.form.email, this.form.password)
-        .then(
-          function() {
-            alert("Zostałeś zalogowany");
-          },
-          function(err) {
-            alert("Błąd" + err.message);
-          }
-        );
+        .then(() => router.replace("home"))
+        .catch((err) => {
+          this.loginFailed = err.message;
+        });
     },
     googleSignUp: function() {
       var provider = new firebase.auth.GoogleAuthProvider();
@@ -143,7 +207,7 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(function(result) {
-          // This gives you a Google Access Token. You can use it to access the Google API.
+          // This gives y ou a Google Access Token. You can use it to access the Google API.
           //var token = result.credential.accessToken;
           // The signed-in user info.
           //var user = result.user;
@@ -169,7 +233,13 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.main {
+  margin-top: 50%;
+  margin: auto;
   text-align: center;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
 }
 </style>

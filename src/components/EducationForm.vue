@@ -1,9 +1,12 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
+  <div>
+    <p>ddd</p>
+    <p></p>
   </div>
 </template>
 
 <script>
 export default {};
 </script>
+
+<style lang="scss" scoped></style>
