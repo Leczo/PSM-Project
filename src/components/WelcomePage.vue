@@ -1,13 +1,11 @@
 <template>
   <b-jumbotron class="main" container-fluid>
     <!-- Register form -->
-    <b-form v-if="showLoginForm">
+    <b-form class="form" v-if="showLoginForm">
       <b-row>
         <b-col>
           <b-button @click="changeForm()" pill variant="primary">
-            {{
-            logForm
-            }}
+            {{ logForm }}
           </b-button>
         </b-col>
       </b-row>
@@ -20,7 +18,12 @@
                 <b-icon-envelope-open-fill></b-icon-envelope-open-fill>
               </b-input-group-text>
             </template>
-            <b-form-input size="lg" v-model="form.email" required placeholder="Wpisz Email"></b-form-input>
+            <b-form-input
+              size="lg"
+              v-model="form.email"
+              required
+              placeholder="Wpisz Email"
+            ></b-form-input>
           </b-input-group>
         </b-col>
       </b-row>
@@ -68,14 +71,18 @@
 
       <b-row>
         <b-col>
-          <b-alert v-if="registrationFailed" show variant="danger">{{ registrationFailed }}</b-alert>
+          <b-alert v-if="registrationFailed" show variant="danger">{{
+            registrationFailed
+          }}</b-alert>
           <b-button @click="signUp" variant="primary">Zarejestruj się</b-button>
         </b-col>
       </b-row>
       <br />
       <b-row>
         <b-col>
-          <b-button @click="googleSignUp" variant="primary">Rejestracja Google</b-button>
+          <b-button @click="googleSignUp" variant="primary"
+            >Rejestracja Google</b-button
+          >
         </b-col>
       </b-row>
     </b-form>
@@ -83,7 +90,9 @@
     <b-form v-else>
       <b-row>
         <b-col>
-          <b-button @click="changeForm()" pill variant="primary">{{ regForm }}</b-button>
+          <b-button @click="changeForm()" pill variant="primary">{{
+            regForm
+          }}</b-button>
         </b-col>
       </b-row>
       <br />
@@ -129,8 +138,12 @@
 
       <b-row>
         <b-col>
-          <b-alert v-if="loginFailed" show variant="danger">{{ loginFailed }}</b-alert>
-          <b-alert v-else-if="registrationSuccess" show variant="success">{{ registrationSuccess }}</b-alert>
+          <b-alert v-if="loginFailed" show variant="danger">{{
+            loginFailed
+          }}</b-alert>
+          <b-alert v-else-if="registrationSuccess" show variant="success">{{
+            registrationSuccess
+          }}</b-alert>
           <b-button @click="signIn" variant="primary">Zaloguj się</b-button>
         </b-col>
       </b-row>
@@ -155,8 +168,8 @@ export default {
       form: {
         email: "",
         password: "",
-        passwordRepeated: ""
-      }
+        passwordRepeated: "",
+      },
     };
   },
   methods: {
@@ -175,7 +188,7 @@ export default {
             "You have successfully registered. Now you can sign in.";
           this.changeForm();
         })
-        .catch(err => {
+        .catch((err) => {
           this.registrationFailed = err.message;
         });
     },
@@ -184,7 +197,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(() => router.replace("home"))
-        .catch(err => {
+        .catch((err) => {
           this.loginFailed = err.message;
         });
     },
@@ -214,8 +227,8 @@ export default {
     },
     changeForm: function() {
       this.showLoginForm = !this.showLoginForm;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -223,7 +236,10 @@ export default {
 .main {
   margin-top: 50%;
   margin: auto;
-  vertical-align: middle;
   text-align: center;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
 }
 </style>
