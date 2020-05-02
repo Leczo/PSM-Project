@@ -1,76 +1,139 @@
 <template>
-  <b-container class="container">
-    <h2>Stworz CV w czterech prostych krokach!</h2>
-    <p>Utwórz konto i się zaloguj.</p>
-    <p>Wprowadź dane do swojego CV</p>
-    <p>Wybierz jeden z dostępnych szablonów</p>
-    <p>Pobierz swoje nowe CV</p>
-    <br />
-    <br />
-
-    <!-- Login Form -->
+  <b-jumbotron class="main" container-fluid>
     <b-form v-if="showLoginForm">
-      <b-form-group id="input-group-1" label="Email address:" label-for="input-1">
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          required
-          placeholder="Enter email"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.password"
-          type="password"
-          required
-          placeholder="Enter password"
-        ></b-form-input>
-      </b-form-group>
-      <b-button @click="signIn()" type="button" variant="primary">Zaloguj się</b-button>
-      <p>
-        Nie masz jeszcze konta?
-        <b-button type="button" variant="primary" @click="changeForm()">Zarejestruj się</b-button>.
-      </p>
+      <b-row>
+        <b-col>
+          <b-button @click="changeForm()" pill variant="primary">{{
+            logForm
+          }}</b-button>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text
+                ><b-icon-envelope-open-fill></b-icon-envelope-open-fill
+              ></b-input-group-text>
+            </template>
+            <b-form-input
+              size="lg"
+              v-model="form.email"
+              required
+              placeholder="Wpisz Email"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text
+                ><b-icon-lock-fill></b-icon-lock-fill
+              ></b-input-group-text>
+            </template>
+            <b-form-input
+              size="lg"
+              v-model="form.password"
+              required
+              placeholder="Wpisz Hasło"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text>
+                <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill
+              ></b-input-group-text>
+            </template>
+            <b-form-input
+              size="lg"
+              v-model="form.name"
+              required
+              placeholder="Powrórz hasło"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+
+      <b-row>
+        <b-col>
+          <b-button @click="signUp" variant="primary">Zarejestruj się</b-button>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-button @click="googleSignUp" variant="primary"
+            >Rejestracja Google</b-button
+          >
+        </b-col>
+      </b-row>
     </b-form>
-    <!-- Register form -->
+
     <b-form v-else>
-      <b-form-group id="input-group-1" label="Email address:" label-for="input-1">
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          required
-          placeholder="Enter email"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.password"
-          type="password"
-          required
-          placeholder="Enter password"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-3" label="Repeat password:" label-for="input-3">
-        <b-form-input
-          id="input-3"
-          v-model="form.passwordRepeated"
-          type="password"
-          required
-          placeholder="Enter a password again"
-        ></b-form-input>
-      </b-form-group>
-      <b-button @click="signUp" type="button" variant="primary">Zarejestruj się</b-button>
-      <p>
-        Zarejestrowany?
-        <b-button type="button" variant="primary" @click="changeForm()">Zaloguj się</b-button>
-        <b-button type="button" variant="primary" @click="googleSignUp()">Google</b-button>.
-      </p>
+      <b-row>
+        <b-col>
+          <b-button @click="changeForm()" pill variant="primary">{{
+            regForm
+          }}</b-button>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text
+                ><b-icon-envelope-open-fill></b-icon-envelope-open-fill
+              ></b-input-group-text>
+            </template>
+            <b-form-input
+              size="lg"
+              v-model="form.email"
+              required
+              placeholder="Wpisz Email"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text
+                ><b-icon-lock-fill></b-icon-lock-fill
+              ></b-input-group-text>
+            </template>
+            <b-form-input
+              size="lg"
+              v-model="form.password"
+              required
+              placeholder="Wpisz Hasło"
+            ></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+
+      <br />
+
+      <b-row>
+        <b-col>
+          <b-button @click="signIn" variant="primary">Zaloguj sie</b-button>
+        </b-col>
+      </b-row>
     </b-form>
-  </b-container>
+  </b-jumbotron>
 </template>
 
 <script>
@@ -81,12 +144,15 @@ export default {
   name: "WelcomePage",
   data() {
     return {
-      showLoginForm: true,
+      showLoginForm: false,
+      wrongCredencials: false,
+      regForm: "Formularz logowania",
+      logForm: "Formularz rejestracji",
       form: {
         email: "",
         password: "",
-        passwordRepeated: ""
-      }
+        passwordRepeated: "",
+      },
     };
   },
   methods: {
@@ -102,7 +168,7 @@ export default {
             alert("Zostałeś Zarejestrowany");
           },
           function(err) {
-            alert("Błąd" + err.message);
+            alert("Błąd " + err.message);
           }
         );
     },
@@ -145,13 +211,16 @@ export default {
     },
     changeForm: function() {
       this.showLoginForm = !this.showLoginForm;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-.container {
+.main {
+  margin-top: 50%;
+  margin: auto;
+  vertical-align: middle;
   text-align: center;
 }
 </style>
