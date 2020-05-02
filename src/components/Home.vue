@@ -106,7 +106,6 @@ export default {
 #sth {
   min-height: 100vh;
   margin: 0%;
-  flex-direction: column;
   justify-content: center;
 }
 #Brand {
