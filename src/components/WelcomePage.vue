@@ -3,9 +3,11 @@
     <b-form v-if="showLoginForm">
       <b-row>
         <b-col>
-          <b-button @click="changeForm()" pill variant="primary">{{
+          <b-button @click="changeForm()" pill variant="primary">
+            {{
             logForm
-          }}</b-button>
+            }}
+          </b-button>
         </b-col>
       </b-row>
       <br />
@@ -13,34 +15,11 @@
         <b-col>
           <b-input-group size="lg">
             <template v-slot:prepend>
-              <b-input-group-text
-                ><b-icon-envelope-open-fill></b-icon-envelope-open-fill
-              ></b-input-group-text>
+              <b-input-group-text>
+                <b-icon-envelope-open-fill></b-icon-envelope-open-fill>
+              </b-input-group-text>
             </template>
-            <b-form-input
-              size="lg"
-              v-model="form.email"
-              required
-              placeholder="Wpisz Email"
-            ></b-form-input>
-          </b-input-group>
-        </b-col>
-      </b-row>
-      <br />
-      <b-row>
-        <b-col>
-          <b-input-group size="lg">
-            <template v-slot:prepend>
-              <b-input-group-text
-                ><b-icon-lock-fill></b-icon-lock-fill
-              ></b-input-group-text>
-            </template>
-            <b-form-input
-              size="lg"
-              v-model="form.password"
-              required
-              placeholder="Wpisz Hasło"
-            ></b-form-input>
+            <b-form-input size="lg" v-model="form.email" required placeholder="Wpisz Email"></b-form-input>
           </b-input-group>
         </b-col>
       </b-row>
@@ -50,15 +29,23 @@
           <b-input-group size="lg">
             <template v-slot:prepend>
               <b-input-group-text>
-                <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill
-              ></b-input-group-text>
+                <b-icon-lock-fill></b-icon-lock-fill>
+              </b-input-group-text>
             </template>
-            <b-form-input
-              size="lg"
-              v-model="form.name"
-              required
-              placeholder="Powrórz hasło"
-            ></b-form-input>
+            <b-form-input size="lg" v-model="form.password" required placeholder="Wpisz Hasło"></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br />
+      <b-row>
+        <b-col>
+          <b-input-group size="lg">
+            <template v-slot:prepend>
+              <b-input-group-text>
+                <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill>
+              </b-input-group-text>
+            </template>
+            <b-form-input size="lg" v-model="form.name" required placeholder="Powrórz hasło"></b-form-input>
           </b-input-group>
         </b-col>
       </b-row>
@@ -72,9 +59,7 @@
       <br />
       <b-row>
         <b-col>
-          <b-button @click="googleSignUp" variant="primary"
-            >Rejestracja Google</b-button
-          >
+          <b-button @click="googleSignUp" variant="primary">Rejestracja Google</b-button>
         </b-col>
       </b-row>
     </b-form>
@@ -82,9 +67,11 @@
     <b-form v-else>
       <b-row>
         <b-col>
-          <b-button @click="changeForm()" pill variant="primary">{{
+          <b-button @click="changeForm()" pill variant="primary">
+            {{
             regForm
-          }}</b-button>
+            }}
+          </b-button>
         </b-col>
       </b-row>
       <br />
@@ -92,16 +79,11 @@
         <b-col>
           <b-input-group size="lg">
             <template v-slot:prepend>
-              <b-input-group-text
-                ><b-icon-envelope-open-fill></b-icon-envelope-open-fill
-              ></b-input-group-text>
+              <b-input-group-text>
+                <b-icon-envelope-open-fill></b-icon-envelope-open-fill>
+              </b-input-group-text>
             </template>
-            <b-form-input
-              size="lg"
-              v-model="form.email"
-              required
-              placeholder="Wpisz Email"
-            ></b-form-input>
+            <b-form-input size="lg" v-model="form.email" required placeholder="Wpisz Email"></b-form-input>
           </b-input-group>
         </b-col>
       </b-row>
@@ -110,16 +92,11 @@
         <b-col>
           <b-input-group size="lg">
             <template v-slot:prepend>
-              <b-input-group-text
-                ><b-icon-lock-fill></b-icon-lock-fill
-              ></b-input-group-text>
+              <b-input-group-text>
+                <b-icon-lock-fill></b-icon-lock-fill>
+              </b-input-group-text>
             </template>
-            <b-form-input
-              size="lg"
-              v-model="form.password"
-              required
-              placeholder="Wpisz Hasło"
-            ></b-form-input>
+            <b-form-input size="lg" v-model="form.password" required placeholder="Wpisz Hasło"></b-form-input>
           </b-input-group>
         </b-col>
       </b-row>
@@ -151,8 +128,8 @@ export default {
       form: {
         email: "",
         password: "",
-        passwordRepeated: "",
-      },
+        passwordRepeated: ""
+      }
     };
   },
   methods: {
@@ -211,8 +188,8 @@ export default {
     },
     changeForm: function() {
       this.showLoginForm = !this.showLoginForm;
-    },
-  },
+    }
+  }
 };
 </script>
 
