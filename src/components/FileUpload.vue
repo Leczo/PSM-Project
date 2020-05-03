@@ -23,13 +23,25 @@ export default {
     uploadImage() {
       var user = firebase.auth().currentUser;
       var upFile = this.selectedFile;
-      var storageRef = firebase.storage().ref(user.uid);
+      var storageRef = firebase.storage().ref(user.uid + ".jpg");
       storageRef.put(upFile);
+    },
+    downloadUrl() {
+      //   firebase
+      var user = firebase.auth().currentUser;
+      firebase
+        .storage()
+        .ref(user.id + "jpg")
+        .getDownloadURL()
+        .then(imgUrl => {
+          this.image = imgUrl;
+        });
     },
 
     data() {
       return {
-        selectedFile: null
+        selectedFile: null,
+        image: ""
       };
     }
   }
