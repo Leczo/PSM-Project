@@ -7,7 +7,11 @@
     <br />
     <br />
     <b-row>
+<<<<<<< HEAD
       <b-button variant="primary" @click="uploadImage()">Zapisz</b-button>
+=======
+      <b-button style="display:block;margin: auto;" variant="primary" @click="uploadImage">Zapisz</b-button>
+>>>>>>> a50615704056b7ec891e12a169db5d0de13b206b
     </b-row>
     <br />
   </div>
