@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <footer>
     <form role="form">
       <div>
         <div class="form-group">
@@ -18,7 +18,7 @@
         <button type="reset" class="btn btn-default">Resetuj</button>
       </div>
     </form>
-  </div>
+  </footer>
 </template>
 
 <script>
