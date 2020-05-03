@@ -22,22 +22,24 @@
           </b-tab>
           <b-tab title="Uzupełnij Dane">
             <template v-slot:title>
-<<<<<<< HEAD
               <b-icon
                 icon="pencil-square"
                 title="d"
                 aria-hidden="true"
               ></b-icon>
-=======
-              <b-icon icon="pencil-square" title="d" aria-hidden="true"></b-icon>
->>>>>>> 4edf6ab43f76e1a430b28eca319a4c820705a4c5
               <span>Uzupełnij Dane</span>
             </template>
             <b-card-text>
               <div>
                 <div>
                   <b-card no-body>
-                    <b-tabs justified variant="secondary" card vertical nav-wrapper-class="w-50">
+                    <b-tabs
+                      justified
+                      variant="secondary"
+                      card
+                      vertical
+                      nav-wrapper-class="w-50"
+                    >
                       <b-tab alingn="left" title="Dane Osobowe" active>
                         <b-card-text>
                           <strong>Dane Osobowe</strong>
@@ -49,13 +51,9 @@
                         <b-card-text>
                           <strong>Edukacja</strong>
                         </b-card-text>
-<<<<<<< HEAD
                         <EducationForm
                           v-on:saveData="saveEducationData"
                         ></EducationForm>
-=======
-                        <EducationForm v-on:saveData="saveEducationData"></EducationForm>
->>>>>>> 4edf6ab43f76e1a430b28eca319a4c820705a4c5
                       </b-tab>
                       <b-tab title="Praca">
                         <b-card-text>
@@ -67,13 +65,9 @@
                         <b-card-text>
                           <strong>Języki</strong>
                         </b-card-text>
-<<<<<<< HEAD
                         <LanguageForm
                           v-on:saveData="saveLanguageData"
                         ></LanguageForm>
-=======
-                        <LanguageForm v-on:saveData="saveLanguageData"></LanguageForm>
->>>>>>> 4edf6ab43f76e1a430b28eca319a4c820705a4c5
                       </b-tab>
                     </b-tabs>
                   </b-card>
@@ -84,15 +78,11 @@
 
           <b-tab te="Zapisane CV">
             <template v-slot:title>
-<<<<<<< HEAD
               <b-icon
                 icon="cloud-download"
                 title="d"
                 aria-hidden="true"
               ></b-icon>
-=======
-              <b-icon icon="cloud-download" title="d" aria-hidden="true"></b-icon>
->>>>>>> 4edf6ab43f76e1a430b28eca319a4c820705a4c5
               <span>Zapisane</span>
             </template>
             <FileUpload />
@@ -119,31 +109,35 @@ export default {
     EducationForm,
     JobForm,
     LanguageForm,
-<<<<<<< HEAD
     PersonalData,
-=======
-    PersonalData
->>>>>>> 4edf6ab43f76e1a430b28eca319a4c820705a4c5
+  },
+  created() {
+    const db = firebase.firestore();
+    var user = firebase.auth().currentUser;
+    db.collection("profiles")
+      .doc(user.uid)
+      .get()
+      .then((doc) => {
+        this.userData = doc.data();
+        console.log(doc.data());
+      });
   },
   methods: {
+    pushData() {
+      let data = this.UserData;
+      const db = firebase.firestore();
+      var user = firebase.auth().currentUser;
+      db.collection("profiles")
+        .doc(user.uid)
+        .set({ data });
+    },
+
     logout() {
       firebase
         .auth()
         .signOut()
         .then(() => router.replace("/"));
     },
-<<<<<<< HEAD
-    getUser() {
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          console.log(user.getIdTokenResult);
-        } else {
-          // No user is signed in.
-        }
-      });
-    },
-=======
->>>>>>> 4edf6ab43f76e1a430b28eca319a4c820705a4c5
     updateData(event) {
       this.cvData.personalData = event;
     },
@@ -161,11 +155,7 @@ export default {
         universityName: event.universityName,
         major: event.major,
         startDate: tempStartDate,
-<<<<<<< HEAD
         endDate: tempEndDate,
-=======
-        endDate: tempEndDate
->>>>>>> 4edf6ab43f76e1a430b28eca319a4c820705a4c5
       };
 
       this.cvData.education.push(data);
@@ -173,18 +163,13 @@ export default {
     saveJobForm(event) {
       let data = {
         position: event.position,
-<<<<<<< HEAD
         companyName: event.companyName,
-=======
-        companyName: event.companyName
->>>>>>> 4edf6ab43f76e1a430b28eca319a4c820705a4c5
       };
       this.cvData.work.push(data);
     },
     saveLanguageData(event) {
       let data = {
         language: event.language,
-<<<<<<< HEAD
         level: event.level,
       };
       this.cvData.languages.push(data);
@@ -192,6 +177,7 @@ export default {
   },
   data() {
     return {
+      userData: {},
       cvData: {
         personalData: {},
         languages: [],
@@ -199,23 +185,7 @@ export default {
         work: [],
       },
     };
-=======
-        level: event.level
-      };
-      this.cvData.languages.push(data);
-    }
->>>>>>> 4edf6ab43f76e1a430b28eca319a4c820705a4c5
   },
-  data() {
-    return {
-      cvData: {
-        personalData: {},
-        languages: [],
-        education: [],
-        work: []
-      }
-    };
-  }
 };
 </script>
 
