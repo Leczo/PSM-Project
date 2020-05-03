@@ -3,49 +3,52 @@
     <div>
       <div class="form-group">
         <label>Imię</label>
-        <input class="form-control" placeholder="np. Jan" />
+        <input v-model="personData.name" class="form-control" />
       </div>
       <div class="form-group">
         <label>Nazwisko</label>
-        <input type="text" placeholder="np. Kowalski" class="form-control" />
+        <input v-model="personData.surname" type="text" class="form-control" />
       </div>
       <div class="form-group">
         <label>Numer telefonu</label>
-        <input
-          type="text"
-          placeholder="w formacie 000-000-000"
-          class="form-control"
-        />
+        <input v-model="personData.phoneNumber" type="text" class="form-control" />
       </div>
       <div class="form-group">
         <label>Email</label>
-        <input
-          type="text"
-          placeholder="np jan.kowalski@mail.pl"
-          class="form-control"
-        />
+        <input v-model="personData.email" type="text" class="form-control" />
       </div>
 
-      <button type="submit" class="btn btn-primary">Zapisz</button>
+      <button type="button" class="btn btn-primary" @click="saveData()">Zapisz</button>
+      <br />
+      <br />
+      <b-alert v-if="saved" show variant="success">Dane zostały pomyślnie zapisane.</b-alert>
     </div>
   </form>
 </template>
 
 <script>
-//import db from "firebase";
-
 export default {
   name: "PersonalData",
   data() {
-    return null;
+    return {
+      personData: {
+        name: "",
+        surname: "",
+        email: "",
+        phoneNumber: ""
+      },
+      saved: false
+    };
   },
   components: {},
   methods: {
-    saveEdForm: function() {
-      return null;
-    },
-  },
+    saveData: function() {
+      this.saved = true;
+      this.$emit("saveData", this.personData);
+      setTimeout(() => this.saved = false, 1000);
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped></style>
