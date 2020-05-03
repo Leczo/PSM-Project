@@ -24,7 +24,6 @@
         <b-alert v-if="saved" show variant="success">Dane zostały pomyślnie dodane.</b-alert>
       </div>
     </form>
-    {{ languageData}}
   </div>
 </template>
 

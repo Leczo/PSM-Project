@@ -1,12 +1,6 @@
 <template>
   <div>
-    <b-navbar
-      toggleable
-      fixed="bottom"
-      sticky="true"
-      type="dark"
-      variant="dark"
-    >
+    <b-navbar toggleable fixed="bottom" sticky="true" type="dark" variant="dark">
       <b-navbar-brand id="Brand">
         <strong>Cv Generator</strong>
       </b-navbar-brand>
@@ -22,8 +16,19 @@
 </template>
 
 <script>
+import firebase from "firebase";
+import router from "../router.js";
+
 export default {
   name: "Nav",
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => router.replace("/"));
+    }
+  }
 };
 </script>
 
