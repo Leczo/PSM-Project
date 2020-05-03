@@ -13,7 +13,12 @@
               <b-icon icon="house-fill" title="d" aria-hidden="true"></b-icon>
               <span></span>
             </template>
-            <b-card-text><CvData /></b-card-text>
+            <b-card-text>
+              <div class="cvData">
+                <h2>Twoje Dane:</h2>
+                {{ cvData }}
+              </div>
+            </b-card-text>
           </b-tab>
           <b-tab title="Uzupełnij Dane">
             <template v-slot:title>
@@ -22,7 +27,7 @@
                 title="d"
                 aria-hidden="true"
               ></b-icon>
-              <span> Uzupełnij Dane</span>
+              <span>Uzupełnij Dane</span>
             </template>
             <b-card-text>
               <div>
@@ -36,21 +41,33 @@
                       nav-wrapper-class="w-50"
                     >
                       <b-tab alingn="left" title="Dane Osobowe" active>
-                        <b-card-text><strong>Dane Osobowe</strong></b-card-text>
-                        <PersonalData />
+                        <b-card-text>
+                          <strong>Dane Osobowe</strong>
+                        </b-card-text>
+                        <PersonalData v-on:saveData="updateData"></PersonalData>
                       </b-tab>
 
                       <b-tab title="Edukacja">
-                        <b-card-text><strong>Edukacja</strong></b-card-text>
-                        <EducationForm />
+                        <b-card-text>
+                          <strong>Edukacja</strong>
+                        </b-card-text>
+                        <EducationForm
+                          v-on:saveData="saveEducationData"
+                        ></EducationForm>
                       </b-tab>
                       <b-tab title="Praca">
-                        <b-card-text><strong>Praca</strong></b-card-text>
-                        <JobForm />
+                        <b-card-text>
+                          <strong>Praca</strong>
+                        </b-card-text>
+                        <JobForm v-on:saveData="saveJobForm"></JobForm>
                       </b-tab>
                       <b-tab title="Języki">
-                        <b-card-text><strong>Języki</strong></b-card-text>
-                        <LanguageForm />
+                        <b-card-text>
+                          <strong>Języki</strong>
+                        </b-card-text>
+                        <LanguageForm
+                          v-on:saveData="saveLanguageData"
+                        ></LanguageForm>
                       </b-tab>
                     </b-tabs>
                   </b-card>
@@ -66,7 +83,7 @@
                 title="d"
                 aria-hidden="true"
               ></b-icon>
-              <span> Zapisane</span>
+              <span>Zapisane</span>
             </template>
             <FileUpload />
           </b-tab>
@@ -84,7 +101,6 @@ import EducationForm from "./EducationForm.vue";
 import JobForm from "./JobForm.vue";
 import LanguageForm from "./LanguageForm.vue";
 import PersonalData from "./PersonalData.vue";
-import CvData from "./CvData.vue";
 
 export default {
   name: "Home",
@@ -94,7 +110,6 @@ export default {
     JobForm,
     LanguageForm,
     PersonalData,
-    CvData,
   },
   methods: {
     logout() {
@@ -112,6 +127,52 @@ export default {
         }
       });
     },
+    updateData(event) {
+      this.cvData.personalData = event;
+    },
+    saveEducationData(event) {
+      let tempStartDate =
+        event.startDate.toString().substring(4, 7) +
+        "/" +
+        event.startDate.toString().substring(11, 15);
+      let tempEndDate =
+        event.endDate.toString().substring(4, 7) +
+        "/" +
+        event.endDate.toString().substring(11, 15);
+
+      let data = {
+        universityName: event.universityName,
+        major: event.major,
+        startDate: tempStartDate,
+        endDate: tempEndDate,
+      };
+
+      this.cvData.education.push(data);
+    },
+    saveJobForm(event) {
+      let data = {
+        position: event.position,
+        companyName: event.companyName,
+      };
+      this.cvData.work.push(data);
+    },
+    saveLanguageData(event) {
+      let data = {
+        language: event.language,
+        level: event.level,
+      };
+      this.cvData.languages.push(data);
+    },
+  },
+  data() {
+    return {
+      cvData: {
+        personalData: {},
+        languages: [],
+        education: [],
+        work: [],
+      },
+    };
   },
 };
 </script>

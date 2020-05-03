@@ -5,6 +5,10 @@ import firebase from 'firebase'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import router from './router'
+import ElementUI from 'element-ui';
+import locale from 'element-ui/lib/locale/lang/pl'
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
