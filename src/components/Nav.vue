@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable fixed="bottom" sticky="true" type="dark" variant="dark">
+    <b-navbar toggleable fixed="bottom" sticky type="dark" variant="dark">
       <b-navbar-brand id="Brand">
         <strong>Cv Generator</strong>
       </b-navbar-brand>

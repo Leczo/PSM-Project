@@ -4,11 +4,6 @@
 
     <b-jumbotron fluid id="jumbotron">
       <div id="main-container">
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@3/distr/fira_code.css"
-        />
-
         <b-card no-body>
           <b-tabs card>
             <b-tab title="Główna" active>
@@ -102,7 +97,11 @@
                   </div>
                   <!-- END -->
                 </div>
-                <b-button v-if="!dataNotAdded" variant="outline-primary" @click="pushData()">Zapisz dane</b-button>
+                <b-button
+                  v-if="!dataNotAdded"
+                  variant="outline-primary"
+                  @click="pushData()"
+                >Zapisz dane</b-button>
                 <br />
                 <br />
                 <b-alert v-if="saved" show variant="success">Dane zostały pomyślnie zapisane.</b-alert>
@@ -149,6 +148,12 @@
                           </b-card-text>
                           <SkillsForm v-on:saveData="saveSkills"></SkillsForm>
                         </b-tab>
+                        <b-tab title="Dodaj zdjęcie">
+                          <b-card-text>
+                            <strong>Dodaj zdjęcie</strong>
+                          </b-card-text>
+                          <FileUpload></FileUpload>
+                        </b-tab>
                       </b-tabs>
                     </b-card>
                   </div>
@@ -159,7 +164,7 @@
             <b-tab te="Zapisane CV">
               <template v-slot:title>
                 <b-icon icon="cloud-download" title="d" aria-hidden="true"></b-icon>
-                <span>Wygeneruj CV z szablonu</span>
+                <span>Wygenerowane CV z szablonu</span>
               </template>
               <CvGenerator :data="cvData" />
             </b-tab>
@@ -179,6 +184,7 @@ import Nav from "./Nav.vue";
 import firebase from "firebase";
 import CvGenerator from "./CvGenerator.vue";
 import SkillsForm from "./SkillsForm.vue";
+import FileUpload from "./FileUpload.vue";
 
 export default {
   name: "Home",
@@ -189,7 +195,8 @@ export default {
     LanguageForm,
     PersonalData,
     Nav,
-    CvGenerator
+    CvGenerator,
+    FileUpload
   },
   methods: {
     pushData() {

@@ -1,154 +1,158 @@
 <template>
-  <b-jumbotron class="main" container-fluid>
-    <!-- Register form -->
-    <b-form class="form" v-if="showLoginForm">
-      <b-row>
-        <b-col>
-          <b-button @click="changeForm()" pill variant="primary">
-            {{ logForm }}
-          </b-button>
-        </b-col>
-      </b-row>
-      <br />
-      <b-row>
-        <b-col>
-          <b-input-group size="lg">
-            <template v-slot:prepend>
-              <b-input-group-text>
-                <b-icon-envelope-open-fill></b-icon-envelope-open-fill>
-              </b-input-group-text>
-            </template>
-            <b-form-input
-              size="lg"
-              v-model="form.email"
-              required
-              placeholder="Wpisz Email"
-            ></b-form-input>
-          </b-input-group>
-        </b-col>
-      </b-row>
-      <br />
-      <b-row>
-        <b-col>
-          <b-input-group size="lg">
-            <template v-slot:prepend>
-              <b-input-group-text>
-                <b-icon-lock-fill></b-icon-lock-fill>
-              </b-input-group-text>
-            </template>
-            <b-form-input
-              size="lg"
-              v-model="form.password"
-              @keyup.enter.native="signUp"
-              required
-              type="password"
-              placeholder="Wpisz Hasło"
-            ></b-form-input>
-          </b-input-group>
-        </b-col>
-      </b-row>
-      <br />
-      <b-row>
-        <b-col>
-          <b-input-group size="lg">
-            <template v-slot:prepend>
-              <b-input-group-text>
-                <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill>
-              </b-input-group-text>
-            </template>
-            <b-form-input
-              @keyup.enter.native="signUp"
-              size="lg"
-              v-model="form.passwordRepeated"
-              required
-              type="password"
-              placeholder="Powtórz hasło"
-            ></b-form-input>
-          </b-input-group>
-        </b-col>
-      </b-row>
-      <br />
+  <div>
+    <b-jumbotron class="main" container-fluid>
+      <!-- Register form -->
+      <h1 id="title">
+        <strong>GENERATOR CV</strong>
+      </h1>
+      <b-form class="form" v-if="showLoginForm">
+        <b-row>
+          <b-col>
+            <b-button @click="changeForm()" pill variant="primary">{{ logForm }}</b-button>
+          </b-col>
+        </b-row>
+        <br />
+        <b-row>
+          <b-col>
+            <b-input-group size="lg">
+              <template v-slot:prepend>
+                <b-input-group-text>
+                  <b-icon-envelope-open-fill></b-icon-envelope-open-fill>
+                </b-input-group-text>
+              </template>
+              <b-form-input size="lg" v-model="form.email" required placeholder="Wpisz Email"></b-form-input>
+            </b-input-group>
+          </b-col>
+        </b-row>
+        <br />
+        <b-row>
+          <b-col>
+            <b-input-group size="lg">
+              <template v-slot:prepend>
+                <b-input-group-text>
+                  <b-icon-lock-fill></b-icon-lock-fill>
+                </b-input-group-text>
+              </template>
+              <b-form-input
+                size="lg"
+                v-model="form.password"
+                @keyup.enter.native="signUp"
+                required
+                type="password"
+                placeholder="Wpisz Hasło"
+              ></b-form-input>
+            </b-input-group>
+          </b-col>
+        </b-row>
+        <br />
+        <b-row>
+          <b-col>
+            <b-input-group size="lg">
+              <template v-slot:prepend>
+                <b-input-group-text>
+                  <b-icon-exclamation-triangle-fill></b-icon-exclamation-triangle-fill>
+                </b-input-group-text>
+              </template>
+              <b-form-input
+                @keyup.enter.native="signUp"
+                size="lg"
+                v-model="form.passwordRepeated"
+                required
+                type="password"
+                placeholder="Powtórz hasło"
+              ></b-form-input>
+            </b-input-group>
+          </b-col>
+        </b-row>
+        <br />
 
-      <b-row>
-        <b-col>
-          <b-alert v-if="registrationFailed" show variant="danger">{{
-            registrationFailed
-          }}</b-alert>
-          <b-button @click="signUp" variant="primary">Zarejestruj się</b-button>
-        </b-col>
-      </b-row>
-      <br />
-      <b-row>
-        <b-col>
-          <b-button @click="googleSignUp" variant="primary"
-            >Rejestracja Google</b-button
-          >
-        </b-col>
-      </b-row>
-    </b-form>
-    <!-- Login form -->
-    <b-form v-else>
-      <b-row>
-        <b-col>
-          <b-button @click="changeForm()" pill variant="primary">{{
-            regForm
-          }}</b-button>
-        </b-col>
-      </b-row>
-      <br />
-      <b-row>
-        <b-col>
-          <b-input-group size="lg">
-            <template v-slot:prepend>
-              <b-input-group-text>
-                <b-icon-envelope-open-fill></b-icon-envelope-open-fill>
-              </b-input-group-text>
-            </template>
-            <b-form-input
-              size="lg"
-              @keyup.enter.native="signIn"
-              v-model="form.email"
-              required
-              placeholder="Wpisz Email"
-            ></b-form-input>
-          </b-input-group>
-        </b-col>
-      </b-row>
-      <br />
-      <b-row>
-        <b-col>
-          <b-input-group size="lg">
-            <template v-slot:prepend>
-              <b-input-group-text>
-                <b-icon-lock-fill></b-icon-lock-fill>
-              </b-input-group-text>
-            </template>
-            <b-form-input
-              @keyup.enter.native="signIn"
-              size="lg"
-              v-model="form.password"
-              required
-              type="password"
-              placeholder="Wpisz Hasło"
-            ></b-form-input>
-          </b-input-group>
-        </b-col>
-      </b-row>
-      <br />
+        <b-row>
+          <b-col>
+            <b-alert v-if="registrationFailed" show variant="danger">
+              {{
+              registrationFailed
+              }}
+            </b-alert>
+            <b-button @click="signUp" variant="primary">Zarejestruj się</b-button>
+          </b-col>
+        </b-row>
+        <br />
+        <b-row>
+          <b-col>
+            <b-button @click="googleSignUp" variant="primary">Rejestracja Google</b-button>
+          </b-col>
+        </b-row>
+      </b-form>
+      <!-- Login form -->
+      <b-form v-else>
+        <b-row>
+          <b-col>
+            <b-button @click="changeForm()" pill variant="primary">
+              {{
+              regForm
+              }}
+            </b-button>
+          </b-col>
+        </b-row>
+        <br />
+        <b-row>
+          <b-col>
+            <b-input-group size="lg">
+              <template v-slot:prepend>
+                <b-input-group-text>
+                  <b-icon-envelope-open-fill></b-icon-envelope-open-fill>
+                </b-input-group-text>
+              </template>
+              <b-form-input
+                size="lg"
+                @keyup.enter.native="signIn"
+                v-model="form.email"
+                required
+                placeholder="Wpisz Email"
+              ></b-form-input>
+            </b-input-group>
+          </b-col>
+        </b-row>
+        <br />
+        <b-row>
+          <b-col>
+            <b-input-group size="lg">
+              <template v-slot:prepend>
+                <b-input-group-text>
+                  <b-icon-lock-fill></b-icon-lock-fill>
+                </b-input-group-text>
+              </template>
+              <b-form-input
+                @keyup.enter.native="signIn"
+                size="lg"
+                v-model="form.password"
+                required
+                type="password"
+                placeholder="Wpisz Hasło"
+              ></b-form-input>
+            </b-input-group>
+          </b-col>
+        </b-row>
+        <br />
 
-      <b-row>
-        <b-col>
-          <b-alert v-if="loginFailed" show variant="danger">{{
-            loginFailed
-          }}</b-alert>
-          <b-alert v-else-if="registrationSuccess" show variant="success">{{
-            registrationSuccess
-          }}</b-alert>
-          <b-button @click="signIn" variant="primary">Zaloguj się</b-button>
-        </b-col>
-      </b-row>
-    </b-form>
-  </b-jumbotron>
+        <b-row>
+          <b-col>
+            <b-alert v-if="loginFailed" show variant="danger">
+              {{
+              loginFailed
+              }}
+            </b-alert>
+            <b-alert v-else-if="registrationSuccess" show variant="success">
+              {{
+              registrationSuccess
+              }}
+            </b-alert>
+            <b-button @click="signIn" variant="primary">Zaloguj się</b-button>
+          </b-col>
+        </b-row>
+      </b-form>
+    </b-jumbotron>
+  </div>
 </template>
 
 <script>
@@ -168,8 +172,8 @@ export default {
       form: {
         email: "",
         password: "",
-        passwordRepeated: "",
-      },
+        passwordRepeated: ""
+      }
     };
   },
   methods: {
@@ -188,7 +192,7 @@ export default {
             "You have successfully registered. Now you can sign in.";
           this.changeForm();
         })
-        .catch((err) => {
+        .catch(err => {
           this.registrationFailed = err.message;
         });
     },
@@ -197,7 +201,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(() => router.replace("home"))
-        .catch((err) => {
+        .catch(err => {
           this.loginFailed = err.message;
         });
     },
@@ -227,12 +231,19 @@ export default {
     },
     changeForm: function() {
       this.showLoginForm = !this.showLoginForm;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
+#title {
+  font-weight: strong;
+  font-family: Fira-code;
+  display: fixed;
+  justify-content: center;
+  /* TODO */
+}
 .main {
   margin-top: 50%;
   margin: auto;
