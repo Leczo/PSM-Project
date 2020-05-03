@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <footer>
     <form role="form">
       <div>
         <div class="form-group">
@@ -17,7 +17,7 @@
         <b-alert v-if="saved" show variant="success">Dane zostały pomyślnie dodane.</b-alert>
       </div>
     </form>
-  </div>
+  </footer>
 </template>
 
 <script>
