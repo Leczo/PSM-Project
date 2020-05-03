@@ -11,7 +11,11 @@
       </div>
       <div class="form-group">
         <label>Numer telefonu</label>
-        <input v-model="personData.phoneNumber" type="text" class="form-control" />
+        <input
+          v-model="personData.phoneNumber"
+          type="text"
+          class="form-control"
+        />
       </div>
       <div class="form-group">
         <label>Email</label>
@@ -23,10 +27,14 @@
         type="button"
         class="btn btn-primary"
         @click="saveData()"
-      >Zapisz</button>
+      >
+        Zapisz
+      </button>
       <br />
       <br />
-      <b-alert v-if="saved" show variant="success">Dane zostały pomyślnie zapisane.</b-alert>
+      <b-alert v-if="saved" show variant="success"
+        >Dane zostały pomyślnie zapisane.</b-alert
+      >
     </div>
   </form>
 </template>
@@ -40,9 +48,9 @@ export default {
         name: "",
         surname: "",
         email: "",
-        phoneNumber: ""
+        phoneNumber: "",
       },
-      saved: false
+      saved: false,
     };
   },
   components: {},
@@ -51,8 +59,8 @@ export default {
       this.saved = true;
       this.$emit("saveData", this.personData);
       setTimeout(() => (this.saved = false), 1000);
-    }
-  }
+    },
+  },
 };
 </script>
 

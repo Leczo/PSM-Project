@@ -3,7 +3,6 @@
     <Nav></Nav>
 
     <b-jumbotron fluid id="jumbotron">
-      {{ cvData }}
       <div id="main-container">
         <b-card no-body>
           <b-tabs card>
@@ -19,18 +18,27 @@
                     <strong>Informacje o tobie:</strong>
                   </h2>
                   <!-- Personal data -->
-                  <div v-if="!dataNotAdded && personalDataAdded" id="personalData">
+                  <div
+                    v-if="!dataNotAdded && personalDataAdded"
+                    id="personalData"
+                  >
                     <h3>Dane personalne:</h3>
                     <ul>
                       <li
-                        v-if="cvData.personalData.name != '' && cvData.personalData.surname != ''"
-                      >Imię i nazwisko: {{ cvData.personalData.name }} {{ cvData.personalData.surname }}</li>
-                      <li
-                        v-if="cvData.personalData.phoneNumber != ''"
-                      >Numer telefonu: {{ cvData.personalData.phoneNumber }}</li>
-                      <li
-                        v-if="cvData.personalData.email != ''"
-                      >Adres email: {{ cvData.personalData.email }}</li>
+                        v-if="
+                          cvData.personalData.name != '' &&
+                            cvData.personalData.surname != ''
+                        "
+                      >
+                        Imię i nazwisko: {{ cvData.personalData.name }}
+                        {{ cvData.personalData.surname }}
+                      </li>
+                      <li v-if="cvData.personalData.phoneNumber != ''">
+                        Numer telefonu: {{ cvData.personalData.phoneNumber }}
+                      </li>
+                      <li v-if="cvData.personalData.email != ''">
+                        Adres email: {{ cvData.personalData.email }}
+                      </li>
                       <hr class="my-4" />
                     </ul>
                   </div>
@@ -50,21 +58,27 @@
                         class="DelBtn"
                         variant="outline-primary"
                         @click="removeData(index)"
-                      >Usuń tę informację</b-button>
+                        >Usuń tę informację</b-button
+                      >
                       <hr class="my-4" />
                     </ul>
                   </div>
                   <!-- Work list -->
                   <div v-if="cvData.work.length > 0">
                     <h3>Praca:</h3>
-                    <ul class="info-list" v-for="(work, index) in cvData.work" :key="work.position">
+                    <ul
+                      class="info-list"
+                      v-for="(work, index) in cvData.work"
+                      :key="work.position"
+                    >
                       <li>Nazwa firmy: {{ work.companyName }}</li>
                       <li>Stanowisko: {{ work.position }}</li>
                       <b-button
                         class="DelBtn"
                         variant="outline-primary"
                         @click="removeDataFromWork(index)"
-                      >Usuń tę informację</b-button>
+                        >Usuń tę informację</b-button
+                      >
                       <hr class="my-4" />
                     </ul>
                   </div>
@@ -82,7 +96,8 @@
                         class="DelBtn"
                         variant="outline-primary"
                         @click="removeDataFromLanguages(index)"
-                      >Usuń tę informację</b-button>
+                        >Usuń tę informację</b-button
+                      >
                       <hr class="my-4" />
                     </ul>
                   </div>
@@ -90,13 +105,17 @@
                   <div>
                     <h3 v-if="cvData.skillset.length > 0">Umiejętności:</h3>
                     <ul class="info-list">
-                      <li v-for="(skill, index) in cvData.skillset" :key="skill">
+                      <li
+                        v-for="(skill, index) in cvData.skillset"
+                        :key="skill"
+                      >
                         {{ skill }}
                         <b-button
                           class="DelBtn"
                           variant="outline-primary"
                           @click="removeSkill(index)"
-                        >Usuń tę informację</b-button>
+                          >Usuń tę informację</b-button
+                        >
                       </li>
                     </ul>
                   </div>
@@ -107,34 +126,51 @@
                   v-if="!dataNotAdded"
                   variant="outline-primary"
                   @click="pushData()"
-                >Zapisz dane</b-button>
+                  >Zapisz dane</b-button
+                >
                 <br />
                 <br />
-                <b-alert v-if="saved" show variant="success">Dane zostały pomyślnie zapisane.</b-alert>
+                <b-alert v-if="saved" show variant="success"
+                  >Dane zostały pomyślnie zapisane.</b-alert
+                >
               </b-card-text>
             </b-tab>
             <b-tab title="Uzupełnij Dane">
               <template v-slot:title>
-                <b-icon icon="pencil-square" title="d" aria-hidden="true"></b-icon>
+                <b-icon
+                  icon="pencil-square"
+                  title="d"
+                  aria-hidden="true"
+                ></b-icon>
                 <span>Uzupełnij Dane</span>
               </template>
               <b-card-text>
                 <div>
                   <div>
                     <b-card no-body>
-                      <b-tabs justified variant="secondary" card vertical nav-wrapper-class="w-50">
+                      <b-tabs
+                        justified
+                        variant="secondary"
+                        card
+                        vertical
+                        nav-wrapper-class="w-50"
+                      >
                         <b-tab alingn="left" title="Dane Osobowe" active>
                           <b-card-text>
                             <strong>Dane Osobowe</strong>
                           </b-card-text>
-                          <PersonalData v-on:saveData="updateData"></PersonalData>
+                          <PersonalData
+                            v-on:saveData="updateData"
+                          ></PersonalData>
                         </b-tab>
 
                         <b-tab title="Edukacja">
                           <b-card-text>
                             <strong>Edukacja</strong>
                           </b-card-text>
-                          <EducationForm v-on:saveData="saveEducationData"></EducationForm>
+                          <EducationForm
+                            v-on:saveData="saveEducationData"
+                          ></EducationForm>
                         </b-tab>
                         <b-tab title="Praca">
                           <b-card-text>
@@ -146,7 +182,9 @@
                           <b-card-text>
                             <strong>Języki</strong>
                           </b-card-text>
-                          <LanguageForm v-on:saveData="saveLanguageData"></LanguageForm>
+                          <LanguageForm
+                            v-on:saveData="saveLanguageData"
+                          ></LanguageForm>
                         </b-tab>
                         <b-tab title="Umiejętności">
                           <b-card-text>
@@ -169,7 +207,11 @@
 
             <b-tab te="Zapisane CV">
               <template v-slot:title>
-                <b-icon icon="cloud-download" title="d" aria-hidden="true"></b-icon>
+                <b-icon
+                  icon="cloud-download"
+                  title="d"
+                  aria-hidden="true"
+                ></b-icon>
                 <span>Wygenerowane CV z szablonu</span>
               </template>
               <CvGenerator :data="cvData" />
@@ -202,7 +244,7 @@ export default {
     PersonalData,
     Nav,
     CvGenerator,
-    FileUpload
+    FileUpload,
   },
   methods: {
     pushData() {
@@ -232,7 +274,7 @@ export default {
         universityName: event.universityName,
         major: event.major,
         startDate: tempStartDate,
-        endDate: tempEndDate
+        endDate: tempEndDate,
       };
 
       this.cvData.education.push(data);
@@ -240,14 +282,14 @@ export default {
     saveJobForm(event) {
       let data = {
         position: event.position,
-        companyName: event.companyName
+        companyName: event.companyName,
       };
       this.cvData.work.push(data);
     },
     saveLanguageData(event) {
       let data = {
         language: event.language,
-        level: event.level
+        level: event.level,
       };
       this.cvData.languages.push(data);
     },
@@ -269,7 +311,7 @@ export default {
     },
     removeSkill(index) {
       this.cvData.skillset.splice(index, 1);
-    }
+    },
   },
   created() {
     const db = firebase.firestore();
@@ -277,7 +319,7 @@ export default {
     db.collection("profiles")
       .doc(user.uid)
       .get()
-      .then(doc => {
+      .then((doc) => {
         if (doc.data() != null) {
           this.cvData = doc.data().data;
         }
@@ -304,7 +346,7 @@ export default {
         this.cvData.personalData.name != null ||
         this.cvData.personalData.surname != null
       );
-    }
+    },
   },
   data() {
     return {
@@ -315,10 +357,10 @@ export default {
         languages: [],
         education: [],
         work: [],
-        skillset: []
-      }
+        skillset: [],
+      },
     };
-  }
+  },
 };
 </script>
 
