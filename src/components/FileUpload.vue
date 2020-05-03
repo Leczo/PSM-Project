@@ -7,7 +7,7 @@
     <br />
     <br />
     <b-row>
-      <b-button variant="primary" @click="uploadImage">Zapisz</b-button>
+      <b-button style="display:block;margin: auto;" variant="primary" @click="uploadImage">Zapisz</b-button>
     </b-row>
     <br />
   </div>

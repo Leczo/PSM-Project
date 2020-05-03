@@ -61,13 +61,13 @@ export default {
     saveData: function() {
       this.saved = true;
       this.$emit("saveData", this.educationData);
-      setTimeout(() => this.saved = false, 1000);
+      setTimeout(() => (this.saved = false), 1000);
     },
     clearForm() {
       this.educationData.universityName = "";
       this.educationData.major = "";
-      this.educationData.startDate = '';
-      this.educationData.endDate = '';
+      this.educationData.startDate = "";
+      this.educationData.endDate = "";
     }
   }
 };
