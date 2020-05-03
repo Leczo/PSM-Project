@@ -112,7 +112,7 @@ export default {
         yAxisPosition += 10;
       }
 
-      doc.line(1, 120, 303, yAxisPosition); // horizontal line
+      doc.line(1, yAxisPosition, 303, yAxisPosition); // horizontal line
 
       yAxisPosition += 10;
       doc.setFont("helvetica");
@@ -129,7 +129,7 @@ export default {
         yAxisPosition += 10;
       }
 
-      doc.line(1, 150, 303, yAxisPosition); // horizontal line
+      doc.line(1, yAxisPosition, 303, yAxisPosition); // horizontal line
       yAxisPosition += 10;
       doc.setFont("helvetica");
       doc.setFontStyle("bold");
@@ -151,7 +151,7 @@ export default {
         yAxisPosition += 10;
       }
 
-      doc.line(1, 180, 303, yAxisPosition); // horizontal line
+      doc.line(1, yAxisPosition, 303, yAxisPosition); // horizontal line
       yAxisPosition += 10;
       doc.setFont("helvetica");
       doc.setFontSize(18);

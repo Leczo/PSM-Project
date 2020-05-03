@@ -1,38 +1,37 @@
 <template>
   <div>
-    <h2>Twoje CV:</h2>
+    <!-- Styled -->
+    <b-row>
+      <b-form-file @change="onFileSelected" placeholder="Wybierz zdjęcie"></b-form-file>
+    </b-row>
     <br />
-    <b-container>
-      <b-row id="element">
-        <b-col>
-          <b-button block sm disabled>Twoje cw</b-button>
-        </b-col>
-        <b-col>
-          <b-button-group>
-            <b-button sm variant="success">Pobierz</b-button>
-            <b-button sm variant="danger">Usuń</b-button>
-          </b-button-group>
-        </b-col>
-      </b-row>
-    </b-container>
+    <br />
+    <b-row>
+      <b-button variant="primary" @click="uploadImage">Zapisz</b-button>
+    </b-row>
+    <br />
   </div>
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
-  data() {
-    return {
-      file: null,
-      file2: null,
-    };
-  },
+  methods: {
+    onFileSelected(e) {
+      this.selectedFile = e.target.files[0];
+    },
+    uploadImage() {
+      var user = firebase.auth().currentUser;
+      var upFile = this.selectedFile;
+      var storageRef = firebase.storage().ref(user.uid);
+      storageRef.put(upFile);
+    },
+
+    data() {
+      return {
+        selectedFile: null
+      };
+    }
+  }
 };
 </script>
-
-<style scoped>
-#element {
-  margin: 0 auto;
-
-  justify-content: center;
-}
-</style>
