@@ -15,8 +15,89 @@
             </template>
             <b-card-text>
               <div class="cvData">
-                <h2>Twoje Dane:</h2>
-                {{ cvData }}
+                <h2 v-if="dataNotAdded">Zacznij od wprowadzenia danych!</h2>
+                <h2 v-else>
+                  <strong>Informacje o tobie:</strong>
+                </h2>
+                <!-- Personal data -->
+                <div
+                  v-if="!dataNotAdded && personalDataAdded"
+                  id="personalData"
+                >
+                  <h3>Dane personalne:</h3>
+                  <ul>
+                    <li
+                      v-if="
+                        cvData.personalData.name != '' &&
+                          cvData.personalData.surname != ''
+                      "
+                    >
+                      Imię i nazwisko: {{ cvData.personalData.name }}
+                      {{ cvData.personalData.surname }}
+                    </li>
+                    <li v-if="cvData.personalData.phoneNumber != ''">
+                      Numer telefonu: {{ cvData.personalData.phoneNumber }}
+                    </li>
+                    <li v-if="cvData.personalData.email != ''">
+                      Adres email: {{ cvData.personalData.email }}
+                    </li>
+                  </ul>
+                </div>
+                <!-- Edu list -->
+                <div v-if="cvData.education.length > 0">
+                  <h3>Edukacja:</h3>
+                  <ul
+                    class="info-list"
+                    v-for="(edu, index) in cvData.education"
+                    :key="edu.universityName"
+                  >
+                    <li>Nazwa szkoły/uczelni: {{ edu.universityName }}</li>
+                    <li>Profil: {{ edu.major }}</li>
+                    <li>Miesiąc/Rok rozpoczęcia: {{ edu.startDate }}</li>
+                    <li>Miesiąc/Rok zakończenia: {{ edu.endDate }}</li>
+                    <b-button
+                      variant="outline-primary"
+                      @click="removeData(index)"
+                      >Usuń tę informację</b-button
+                    >
+                    <b-button @click="pushData()">Zapisz Dane</b-button>
+                  </ul>
+                </div>
+                <!-- Work list -->
+                <div v-if="cvData.work.length > 0">
+                  <h3>Praca:</h3>
+                  <ul
+                    class="info-list"
+                    v-for="(work, index) in cvData.work"
+                    :key="work.position"
+                  >
+                    <li>Nazwa firmy: {{ work.companyName }}</li>
+                    <li>Stanowisko: {{ work.position }}</li>
+                    <b-button
+                      variant="outline-primary"
+                      @click="removeDataFromWork(index)"
+                      >Usuń tę informację</b-button
+                    >
+                    <hr class="my-4" />
+                  </ul>
+                </div>
+                <!-- Languages list -->
+                <div v-if="cvData.languages.length > 0">
+                  <h3>Znajomośc języków:</h3>
+                  <ul
+                    class="info-list"
+                    v-for="(lang, index) in cvData.languages"
+                    :key="lang.language"
+                  >
+                    <li>Język: {{ lang.language }}</li>
+                    <li>Poziom: {{ lang.level }}</li>
+                    <b-button
+                      variant="outline-primary"
+                      @click="removeDataFromLanguages(index)"
+                      >Usuń tę informację</b-button
+                    >
+                  </ul>
+                </div>
               </div>
             </b-card-text>
           </b-tab>
@@ -94,13 +175,13 @@
 </template>
 
 <script>
-import firebase from "firebase";
-import router from "../router.js";
 import FileUpload from "./FileUpload.vue";
 import EducationForm from "./EducationForm.vue";
 import JobForm from "./JobForm.vue";
 import LanguageForm from "./LanguageForm.vue";
 import PersonalData from "./PersonalData.vue";
+import firebase from "firebase";
+import router from "../router.js";
 
 export default {
   name: "Home",
@@ -118,13 +199,13 @@ export default {
       .doc(user.uid)
       .get()
       .then((doc) => {
-        this.userData = doc.data();
-        console.log(doc.data());
+        this.cvData = doc.data();
       });
   },
   methods: {
     pushData() {
-      let data = this.UserData;
+      let data = this.cvData;
+      console.log(data);
       const db = firebase.firestore();
       var user = firebase.auth().currentUser;
       db.collection("profiles")
@@ -173,6 +254,32 @@ export default {
         level: event.level,
       };
       this.cvData.languages.push(data);
+    },
+    removeData(index) {
+      this.cvData.education.splice(index, 1);
+    },
+    removeDataFromWork(index) {
+      this.cvData.work.splice(index, 1);
+    },
+    removeDataFromLanguages(index) {
+      this.cvData.languages.splice(index, 1);
+    },
+  },
+  computed: {
+    dataNotAdded() {
+      return (
+        this.cvData.languages.length == 0 &&
+        this.cvData.education.length == 0 &&
+        this.cvData.work.length == 0 &&
+        this.cvData.personalData.name == null &&
+        this.cvData.personalData.surname == null
+      );
+    },
+    personalDataAdded() {
+      return (
+        this.cvData.personalData.name != null ||
+        this.cvData.personalData.surname != null
+      );
     },
   },
   data() {
