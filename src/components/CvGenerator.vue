@@ -2,6 +2,7 @@
   <div>
     <header class="masthead">
       <div class="container h-100">
+        <b-img :src="data.imageUrl" fluid alt="CV Photo"></b-img>
         <div class="row h-100 align-items-center">
           <div class="col-12 text-center">
             <h1 class="font-weight-light">Curriculum Vitae</h1>
@@ -68,7 +69,7 @@ export default {
 
   props: ["data"],
   methods: {
-    savePDF() {
+    async savePDF() {
       var doc = new jsPDF();
       var fullName =
         this.data.personalData.name.toUpperCase() +

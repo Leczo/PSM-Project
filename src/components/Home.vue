@@ -3,6 +3,7 @@
     <Nav></Nav>
 
     <b-jumbotron fluid id="jumbotron">
+      {{ cvData }}
       <div id="main-container">
         <b-card no-body>
           <b-tabs card>
@@ -157,7 +158,7 @@
                           <b-card-text>
                             <strong>Dodaj zdjęcie</strong>
                           </b-card-text>
-                          <FileUpload></FileUpload>
+                          <FileUpload v-on:saveData="saveUrl"></FileUpload>
                         </b-tab>
                       </b-tabs>
                     </b-card>
@@ -254,6 +255,9 @@ export default {
       let skill = event;
       this.cvData.skillset.push(skill);
     },
+    saveUrl(event) {
+      this.cvData.imageUrl = event;
+    },
     removeData(index) {
       this.cvData.education.splice(index, 1);
     },
@@ -281,6 +285,7 @@ export default {
         if (this.cvData.skillset == null) this.cvData.skillset = [];
         if (this.cvData.education == null) this.cvData.education = [];
         if (this.cvData.work == null) this.cvData.work = [];
+        if (this.cvData.imageUrl == null) this.cvData.imageUrl = "";
       });
   },
   computed: {
@@ -305,6 +310,7 @@ export default {
     return {
       saved: false,
       cvData: {
+        imageUrl: "",
         personalData: {},
         languages: [],
         education: [],
