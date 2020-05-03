@@ -32,6 +32,7 @@
                     <li
                       v-if="cvData.personalData.email != ''"
                     >Adres email: {{ cvData.personalData.email }}</li>
+                    <hr class="my-4" />
                   </ul>
                 </div>
                 <!-- Edu list -->
@@ -50,6 +51,7 @@
                       variant="outline-primary"
                       @click="removeData(index)"
                     >Usuń tę informację</b-button>
+                    <hr class="my-4" />
                   </ul>
                 </div>
                 <!-- Work list -->
@@ -79,9 +81,11 @@
                       variant="outline-primary"
                       @click="removeDataFromLanguages(index)"
                     >Usuń tę informację</b-button>
+                    <hr class="my-4" />
                   </ul>
                 </div>
               </div>
+              <b-button variant="outline-primary" @click="pushData()">Zapisz dane</b-button>
             </b-card-text>
           </b-tab>
           <b-tab title="Uzupełnij Dane">
@@ -145,6 +149,7 @@ import EducationForm from "./EducationForm.vue";
 import JobForm from "./JobForm.vue";
 import LanguageForm from "./LanguageForm.vue";
 import PersonalData from "./PersonalData.vue";
+import firebase from "firebase";
 
 export default {
   name: "Home",
@@ -155,7 +160,25 @@ export default {
     LanguageForm,
     PersonalData
   },
+  created() {
+    const db = firebase.firestore();
+    var user = firebase.auth().currentUser;
+    db.collection("profiles")
+      .doc(user.uid)
+      .get()
+      .then(doc => {
+        this.cvData = doc.data().data;
+      });
+  },
   methods: {
+    pushData() {
+      let data = this.cvData;
+      const db = firebase.firestore();
+      var user = firebase.auth().currentUser;
+      db.collection("profiles")
+        .doc(user.uid)
+        .set({ data });
+    },
     updateData(event) {
       this.cvData.personalData = event;
     },
