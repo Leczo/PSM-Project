@@ -103,6 +103,15 @@ export default {
         .signOut()
         .then(() => router.replace("/"));
     },
+    getUser() {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log(user.getIdTokenResult);
+        } else {
+          // No user is signed in.
+        }
+      });
+    },
   },
 };
 </script>
