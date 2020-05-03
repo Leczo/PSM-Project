@@ -3,7 +3,7 @@
     <b-jumbotron class="main" container-fluid>
       <!-- Register form -->
       <h1 id="title">
-        <strong>GENERATOR CV</strong>
+        <span class="title">GENERATOR CV</span>
       </h1>
       <b-form class="form" v-if="showLoginForm">
         <b-row>
@@ -237,6 +237,8 @@ export default {
 </script>
 
 <style scoped>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,700&display=swap" rel="stylesheet">
+
 #title {
   font-weight: strong;
   font-family: Fira-code;
@@ -252,5 +254,12 @@ export default {
   min-height: 100vh;
   flex-direction: column;
   justify-content: center;
+}
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  display: block;
+  padding: 0 25px 25px 25px;
+  margin-top: 0;
 }
 </style>
