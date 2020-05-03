@@ -1,28 +1,11 @@
 <template>
-  <b-jumbotron id="jumbotron">
+  <b-jumbotron fluid id="jumbotron">
     <div id="main-container">
       <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@3/distr/fira_code.css"
       />
-      <b-navbar
-        toggleable
-        fixed="bottom"
-        sticky="true"
-        type="dark"
-        variant="dark"
-      >
-        <b-navbar-brand id="Brand">
-          <strong>Cv Generator</strong>
-        </b-navbar-brand>
 
-        <b-dropdown right text="Right align" variant="secondary">
-          <template v-slot:button-content>
-            <b-icon icon="power" aria-hidden="true"></b-icon>
-          </template>
-          <b-dropdown-item @click="logout()">Wyloguj</b-dropdown-item>
-        </b-dropdown>
-      </b-navbar>
       <b-card no-body>
         <b-tabs card>
           <b-tab title="Główna" active>
@@ -52,7 +35,7 @@
                       vertical
                       nav-wrapper-class="w-50"
                     >
-                      <b-tab title="Dane Osobowe" active>
+                      <b-tab alingn="left" title="Dane Osobowe" active>
                         <b-card-text><strong>Dane Osobowe</strong></b-card-text>
                         <PersonalData />
                       </b-tab>
@@ -89,14 +72,6 @@
           </b-tab>
         </b-tabs>
       </b-card>
-      <b-navbar
-        toggleable
-        style="  border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;"
-        fixed="bottom"
-        sticky="true"
-        type="dark"
-        variant="dark"
-      ></b-navbar>
     </div>
   </b-jumbotron>
 </template>
@@ -134,17 +109,9 @@ export default {
 
 <style scoped>
 #jumbotron {
-  min-height: 100vh;
   margin: 0%;
-  flex-direction: column;
-  justify-content: center;
 }
-#main-container {
-  width: 80%;
-  margin: 0 auto;
-  display: block;
-  justify-content: center;
-}
+
 #Brand {
   font-family: "Fira Code", mono;
 }

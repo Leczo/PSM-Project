@@ -1,16 +1,20 @@
 <template>
   <div>
     <h2>Twoje CV:</h2>
-    <b-row id="element">
-      <b-col>
-        <p>JAKIEŚ CV --------</p>
-      </b-col>
-      <b-col> </b-col>
-      <b-col>
-        <b-button squared variant="success">Pobierz</b-button>
-        <b-button squared variant="danger">Usuń</b-button>
-      </b-col>
-    </b-row>
+    <br />
+    <b-container>
+      <b-row id="element">
+        <b-col>
+          <b-button block sm disabled>Twoje cw</b-button>
+        </b-col>
+        <b-col>
+          <b-button-group>
+            <b-button sm variant="success">Pobierz</b-button>
+            <b-button sm variant="danger">Usuń</b-button>
+          </b-button-group>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
