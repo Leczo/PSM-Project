@@ -1,0 +1,22 @@
+{
+   "name": "CvGenerator",
+   "short_name": "CreateCV",
+   "start_url": "index.html",
+   "display": "standalone",
+   "description": "Tu wygenerujesz swoje CV",
+   "background_color": "#fdfdfd",
+   "theme_color": "#db4938",
+   "orientation": "portrait-primary",
+   "icons": [
+      {
+         "src": "../src/imag/favicon.png",
+         "sizes": "144x144",
+         "type": "image/png"
+      },
+      {
+         "src": "../src/imag/favicon.png",
+         "sizes": "512x512",
+         "type": "image/png"
+      }
+   ]
+}
