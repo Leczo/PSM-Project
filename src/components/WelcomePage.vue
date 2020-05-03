@@ -237,7 +237,6 @@ export default {
 </script>
 
 <style scoped>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,700&display=swap" rel="stylesheet">
 
 #title {
   font-weight: strong;
@@ -257,7 +256,7 @@ export default {
 }
 
 .title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   display: block;
   padding: 0 25px 25px 25px;
   margin-top: 0;
