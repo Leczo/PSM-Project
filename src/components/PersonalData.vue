@@ -18,7 +18,12 @@
         <input v-model="personData.email" type="text" class="form-control" />
       </div>
 
-      <button type="button" class="btn btn-primary" @click="saveData()">Zapisz</button>
+      <button
+        style="display:block;margin: auto;"
+        type="button"
+        class="btn btn-primary"
+        @click="saveData()"
+      >Zapisz</button>
       <br />
       <br />
       <b-alert v-if="saved" show variant="success">Dane zostały pomyślnie zapisane.</b-alert>
@@ -45,7 +50,7 @@ export default {
     saveData: function() {
       this.saved = true;
       this.$emit("saveData", this.personData);
-      setTimeout(() => this.saved = false, 1000);
+      setTimeout(() => (this.saved = false), 1000);
     }
   }
 };

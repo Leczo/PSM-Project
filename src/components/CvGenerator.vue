@@ -57,7 +57,7 @@
         </div>
       </div>
     </main>
-    <b-button variant="outline-primary" @click="savePDF()">Wygeneruj CV do pliku pdf</b-button>
+    <b-button id="genButton" variant="outline-primary" @click="savePDF()">Wygeneruj CV do pliku pdf</b-button>
   </div>
 </template>
 
@@ -244,5 +244,9 @@ h3 {
   background-size: cover;
   background-position: fixed;
   background-repeat: no-repeat;
+}
+#genButton {
+  display: block;
+  margin: auto;
 }
 </style>

@@ -46,6 +46,7 @@
                       <li>Miesiąc/Rok rozpoczęcia: {{ edu.startDate }}</li>
                       <li>Miesiąc/Rok zakończenia: {{ edu.endDate }}</li>
                       <b-button
+                        class="DelBtn"
                         variant="outline-primary"
                         @click="removeData(index)"
                       >Usuń tę informację</b-button>
@@ -59,6 +60,7 @@
                       <li>Nazwa firmy: {{ work.companyName }}</li>
                       <li>Stanowisko: {{ work.position }}</li>
                       <b-button
+                        class="DelBtn"
                         variant="outline-primary"
                         @click="removeDataFromWork(index)"
                       >Usuń tę informację</b-button>
@@ -76,6 +78,7 @@
                       <li>Język: {{ lang.language }}</li>
                       <li>Poziom: {{ lang.level }}</li>
                       <b-button
+                        class="DelBtn"
                         variant="outline-primary"
                         @click="removeDataFromLanguages(index)"
                       >Usuń tę informację</b-button>
@@ -89,6 +92,7 @@
                       <li v-for="(skill, index) in cvData.skillset" :key="skill">
                         {{ skill }}
                         <b-button
+                          class="DelBtn"
                           variant="outline-primary"
                           @click="removeSkill(index)"
                         >Usuń tę informację</b-button>
@@ -98,6 +102,7 @@
                   <!-- END -->
                 </div>
                 <b-button
+                  class="SaveBtn"
                   v-if="!dataNotAdded"
                   variant="outline-primary"
                   @click="pushData()"
@@ -316,6 +321,11 @@ export default {
   margin: 0;
 }
 
+.DelBtn,
+.SaveBtn {
+  display: block;
+  margin: auto;
+}
 #Brand {
   font-family: "Fira Code", mono;
 }
